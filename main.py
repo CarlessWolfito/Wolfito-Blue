@@ -6,6 +6,26 @@ import os
 from datetime import datetime
 import pytz
 from tonystark_chavo import enviar_mensaje
+from flask import Flask, render_template
+from threading import Thread
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return '''<body style="margin: 0; padding: 0;">
+    <iframe width="100%" height="100%" src="https://axocoder.vercel.app/" frameborder="0" allowfullscreen></iframe>
+  </body>'''
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+def keep_alive():  
+    t = Thread(target=run)
+    t.start()
+
+keep_alive()
+print("Server Running Because of Axo")
 
 # Lee el token de la variable de entorno
 token = os.getenv("DISCORD_BOT_TOKEN")
